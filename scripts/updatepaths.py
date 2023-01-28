@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Optional
-# NORMAL IMPORTS 
+# NORMAL IMPORTS
 import argparse
 from typing import NamedTuple
 import json
@@ -10,11 +10,11 @@ import pathlib
 import os.path
 
 class read_config:
-    
+
     def __enter__(self, *args, **kwargs):
         path = os.path.join(os.path.curdir, 'tsconfig.json')
         with open(path) as f:
-            data = json.loads('\n'.join(f.readlines())) 
+            data = json.loads('\n'.join(f.readlines()))
             dat2 = data['compilerOptions']
             return Config(paths=dat2['paths'])
     def __exit__(self, *args, **kwargs):
@@ -63,6 +63,6 @@ def main() -> int:
     main = Main()
 
     return main.run()
-    
+
 if __name__ == '__main__':
     raise SystemExit(main())
