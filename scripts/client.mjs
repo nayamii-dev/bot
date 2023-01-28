@@ -15,11 +15,13 @@ const env = await (async () => {
     return dat;
 })();
 
-await client.on('ready', async (c) => {
-    await c.user.edit({
-        avatar: await readFile(process.argv.slice(3)[0]),
-        username: process.argv.slice(2)[0]
-    });
-    client.destroy();
-    process.exit(0);
-}).login(env.DISCORD_TOKEN)
+await client
+    .on('ready', async (c) => {
+        await c.user.edit({
+            avatar: await readFile(process.argv.slice(3)[0]),
+            username: process.argv.slice(2)[0],
+        });
+        client.destroy();
+        process.exit(0);
+    })
+    .login(env.DISCORD_TOKEN);

@@ -1,28 +1,28 @@
 {
-  "name": "naya",
-  "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nayamii-dev/naya.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nayamii-dev/naya/issues"
-  },
-  "homepage": "https://github.com/nayamii-dev/naya#readme",
-  "dependencies": {
-    "@prisma/client": "^4.9.0",
-    "discord.js": "^14.7.1"
-  },
-  "devDependencies": {
-    "prisma": "^4.9.0"
-  }
+    "name": "naya",
+    "version": "1.0.0",
+    "private": true,
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nayamii-dev/naya.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/nayamii-dev/naya/issues"
+    },
+    "homepage": "https://github.com/nayamii-dev/naya#readme",
+    "dependencies": {
+        "@prisma/client": "^4.9.0",
+        "discord.js": "^14.7.1"
+    },
+    "devDependencies": {
+        "prisma": "^4.9.0"
+    }
 }
