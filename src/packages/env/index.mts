@@ -20,20 +20,19 @@ export class EnvManager<Env extends Record<string, string>> {
     }
 
     file(path: string) {
-        const dat = this.data as any;
         // const content = readFileSync(path, { encoding: 'utf-8' });
         (() => {
-            const content = readFileSync(path, { encoding: 'utf-8' });
-            const dat = {};
+            const content = readFileSync(path, {
+                encoding: 'utf-8',
+            });
 
             for (const abc of content.split('\n')) {
                 if (!abc.includes('=')) continue;
                 const [key, ...values] = abc.split('=');
                 if (!key || !values.length) continue;
                 //@ts-expect-error
-                dat[key] = values.join('=');
+                this.data[key] = values.join('=');
             }
-            return dat;
         })();
         return this;
     }

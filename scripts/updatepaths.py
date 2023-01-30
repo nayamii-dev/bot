@@ -9,6 +9,11 @@ import json
 import pathlib
 import os.path
 
+
+def debug(msg: str, debug_flag=False):
+    if debug_flag:
+        print(msg)
+
 class read_config:
 
     def __enter__(self, *args, **kwargs):
@@ -28,7 +33,7 @@ class Main:
     def run(self) -> int:
         parser = argparse.ArgumentParser()
 
-        parser.add_argument('path')
+        parser.add_argument('--debug')
 
 
         args = parser.parse_args()
@@ -42,20 +47,21 @@ class Main:
         dist_path = os.path.join(
             os.path.abspath(os.path.curdir), 'dist'
         )
-        print(dist_path)
+
+        debug(dist_path)
         constructedPath = pathlib.Path(dist_path)
-        print(constructedPath)
+        debug(constructedPath)
         for a in constructedPath.rglob(pattern='*'):
             if a.is_file():
                 content = a.read_text('utf-8')
                 new_content = ''
                 for key in paths.keys():
-                    print(f'{key=}')
+                    debug(f'{key=}')
                     path = os.path.join(os.path.abspath(os.path.curdir), 'dist', paths[key][0].replace('*', ''))
                     new_content = content.replace(key.replace('*', ''), path)
-                print(f'{new_content}')
+                debug(f'{new_content}')
                 a.write_text(new_content)
-                # print(content)
+                debug(f'updated {a.name}.')
 
 
 def main() -> int:

@@ -3,7 +3,9 @@ import { readFile } from 'node:fs/promises';
 const client = new Client({ intents: [] });
 
 const env = await (async () => {
-    const content = await readFile('.config/.env', { encoding: 'utf-8' });
+    const content = await readFile('.config/.env', {
+        encoding: 'utf-8',
+    });
     const dat = {};
 
     for (const abc of content.split('\n')) {
@@ -18,8 +20,10 @@ const env = await (async () => {
 await client
     .on('ready', async (c) => {
         await c.user.edit({
-            avatar: await readFile(process.argv.slice(3)[0]),
-            username: process.argv.slice(2)[0],
+            avatar: process.argv.slice(2)[0]
+                ? await readFile(process.argv.slice(2)[0])
+                : undefined,
+            username: process.argv.slice(3)[0],
         });
         client.destroy();
         process.exit(0);
