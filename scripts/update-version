@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+const { readFileSync, writeFileSync, fstat } = require('fs');
+const { resolve } = require('path');
+const MAIN_PATH = resolve(process.cwd());
+const VERSION_DIST_FILE = resolve(
+    MAIN_PATH,
+    'src',
+    'packages',
+    'util',
+    'version.mts',
+);
+const pjson = require('../package.json');
+const plockson = require('../package-lock.json');
+
+const old = pjson.version;
+const varg = process.argv.slice(2).at(0);
+if (!varg) {
+    console.log([`usage: node scripts/update-version [VERSION]`].join('\n'));
+    process.exit(0);
+}
+
+function pt(i) {
+    return i < 10 ? `0${i}` : i;
+}
+const time = new Date();
+const version = `${varg}.${time.getFullYear()}-${pt(time.getMonth() + 1)}-${pt(
+    time.getDate(),
+)}`;
+console.log(`[NOTICE] switching version from ${old} to ${version} `);
+
+const content = `export const $VERSION = '${version}'`;
+
+pjson.version = version;
+plockson.version = version;
+
+writeFileSync(VERSION_DIST_FILE, content);
+writeFileSync(
+    resolve(MAIN_PATH, 'package.json'),
+    JSON.stringify(pjson, null, 4),
+);
+writeFileSync(
+    resolve(MAIN_PATH, 'package-lock.json'),
+    JSON.stringify(plockson, null, 4),
+);
