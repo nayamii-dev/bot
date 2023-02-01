@@ -2,7 +2,7 @@
     "name": "naya",
     "version": "0.0.1.2023-01-30",
     "private": true,
-    "description": "",
+    "description": "kitsune discord bot",
     "main": "dist/bot/index.mjs",
     "scripts": {
         "test": "exit 1",
