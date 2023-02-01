@@ -3,17 +3,18 @@
     "version": "0.0.1.2023-01-30",
     "private": true,
     "description": "",
-    "main": "index.js",
+    "main": "dist/bot/index.mjs",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "exit 1",
+        "build": "rm -rf dist/ && python3 -m scripts.updatepaths && tsc"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/nayamii-dev/naya.git"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "snipsy",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/nayamii-dev/naya/issues"
     },
