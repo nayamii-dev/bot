@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 export class EnvManager<Env extends Record<string, string>> {
-    data: Env;
+    private readonly data: Env;
 
     constructor() {
         this.data = {} as Env;
@@ -30,8 +30,13 @@ export class EnvManager<Env extends Record<string, string>> {
                 if (!abc.includes('=')) continue;
                 const [key, ...values] = abc.split('=');
                 if (!key || !values.length) continue;
-                //@ts-expect-error
-                this.data[key] = values.join('=');
+                Object.defineProperty(this.data, key, {
+                    configurable: false,
+                    enumerable: false,
+                    get() {
+                        return values.join('=');
+                    }
+                });
             }
         })();
         return this;

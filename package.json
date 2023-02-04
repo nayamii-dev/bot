@@ -1,12 +1,16 @@
 {
     "name": "naya",
-    "version": "0.0.1.2023-01-30",
+    "version": "0.0.1",
     "private": true,
     "description": "kitsune discord bot",
     "main": "dist/bot/index.mjs",
     "scripts": {
         "test": "exit 1",
-        "build": "rm -rf dist/ && python3 -m scripts.updatepaths && tsc"
+        "rm": "rm -rf dist",
+        "tsc": "tsc",
+        "start": "npm run build && node dist/bot/index",
+        "update-paths": "python3 -m scripts.updatepaths",
+        "build": "npm run rm && npm run tsc && npm run update-paths"
     },
     "repository": {
         "type": "git",

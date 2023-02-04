@@ -2,7 +2,7 @@
     "compilerOptions": {
         "alwaysStrict": true,
         "experimentalDecorators": true,
-        "module": "ES2022",
+        "module": "CommonJS",
         "moduleResolution": "Node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
@@ -13,7 +13,9 @@
         "strict": true,
         "baseUrl": "src",
         "paths": {
-            "@naya/*": ["packages/*"]
+            "@naya/*": [
+                "packages/*"
+            ]
         },
         "target": "ES2020"
     }
