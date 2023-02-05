@@ -2,7 +2,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export function readdirAll(dir: string) {
-
     const res: string[] = [];
 
     const fileDatas = fs.readdirSync(dir, { withFileTypes: true });
@@ -16,9 +15,7 @@ export function readdirAll(dir: string) {
         }
     }
     return res;
-
 }
-
 
 export function xrequire<T extends Record<string, any>>(thing: string): T {
     return require(thing);

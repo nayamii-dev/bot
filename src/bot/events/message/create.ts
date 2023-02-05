@@ -5,16 +5,12 @@ import { Events, Message } from 'discord.js';
     id: 'events.client.message',
     event: Events.MessageCreate,
     handler: 'client',
-    type: 'once'
+    type: 'once',
 })
-export default class ReadyEvent extends CustomEvent {
-
-
+export default class MessageCreateEvent extends CustomEvent {
     run(msg: Message<true>) {
         if (this.client.env.get('NODE_ENV') === 'dev') {
-            console.debug(`[DEBUG] new message on ${msg.channel.id}`);
+            console.debug(`[DEBUG] new message in ${msg.channel.name}`);
         }
-
     }
-
 }

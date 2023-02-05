@@ -7,10 +7,7 @@ export interface CustomEventOptions extends modules.CustomModuleOptions {
 }
 
 export abstract class CustomEvent extends modules.CustomModule {
-
     declare options: CustomEventOptions;
-
-
 
     abstract run(...args: unknown[]): any;
 }

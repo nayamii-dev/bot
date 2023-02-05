@@ -4,11 +4,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient({
     datasources: {
         db: {
-            url: 'mongodb://localhost:27017/naya'
-        }
-    }
+            url: 'mongodb://localhost:27017/naya',
+        },
+    },
 });
-
 
 const naya = new Nayami(prisma, env);
 async function main() {

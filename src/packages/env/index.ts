@@ -35,7 +35,7 @@ export class EnvManager<Env extends Record<string, string>> {
                     enumerable: false,
                     get() {
                         return values.join('=');
-                    }
+                    },
                 });
             }
         })();

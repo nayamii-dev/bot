@@ -18,18 +18,13 @@ export class CustomModule {
      */
     handler!: ModuleHandler<this>;
 
-
     options: CustomModuleOptions;
-
 
     constructor(options: CustomModuleOptions) {
         this.options = options;
     }
 
-
-
     static applyOptions<Opt extends CustomModuleOptions>(options: Opt) {
-
         return (cls: any): any => {
             abstract class NayaModule extends cls {
                 constructor() {
@@ -40,5 +35,4 @@ export class CustomModule {
             return NayaModule;
         };
     }
-
 }

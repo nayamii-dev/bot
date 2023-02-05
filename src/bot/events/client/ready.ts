@@ -6,14 +6,10 @@ import { Events } from 'discord.js';
     id: 'events.client.ready',
     event: Events.ClientReady,
     handler: 'client',
-    type: 'once'
+    type: 'once',
 })
 export default class ReadyEvent extends CustomEvent {
-
-
     run(client: Nayami<true>) {
         console.log(`[READY] ${client.user.username} is now ready`);
-
     }
-
 }

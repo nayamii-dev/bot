@@ -1,6 +1,11 @@
 import { EnvManager } from '@naya/env';
-import { ActivityType, ClientOptions, DefaultRestOptions, Options, Partials } from 'discord.js';
-
+import {
+    ActivityType,
+    ClientOptions,
+    DefaultRestOptions,
+    Options,
+    Partials,
+} from 'discord.js';
 
 export const clientOptions: ClientOptions = {
     intents: [
@@ -12,7 +17,7 @@ export const clientOptions: ClientOptions = {
         'GuildMessages',
         'GuildModeration',
         'Guilds',
-        'MessageContent'
+        'MessageContent',
     ],
     closeTimeout: 5_000,
     waitGuildTimeout: 5_000,
@@ -27,33 +32,32 @@ export const clientOptions: ClientOptions = {
         Partials.User,
     ],
     presence: {
-        activities: [{
-            name: 'netchicks',
-            type: ActivityType.Watching
-        }]
+        activities: [
+            {
+                name: 'netchicks',
+                type: ActivityType.Watching,
+            },
+        ],
     },
     sweepers: Options.DefaultSweeperSettings,
     ws: {
         properties: {
             browser: 'Discord iOS',
-            device: 'discord.js'
-        }
+            device: 'discord.js',
+        },
     },
     rest: DefaultRestOptions,
     allowedMentions: {},
     failIfNotExists: true,
-
-
 };
-
 
 export const env = new EnvManager<{
     DISCORD_TOKEN: string;
-    NODE_ENV: 'prod' | 'dev' | 'prem',
+    NODE_ENV: 'prod' | 'dev' | 'prem';
     CLIENT_ID: string;
 }>()
     .setDefaults({
         CLIENT_ID: '947042553457410088',
-        NODE_ENV: 'dev'
+        NODE_ENV: 'dev',
     })
     .file('./.config/.env');
