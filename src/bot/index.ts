@@ -10,9 +10,11 @@ const prisma = new PrismaClient({
 });
 
 
-const naya = new Nayami(prisma);
+const naya = new Nayami(prisma, env);
 async function main() {
-    await naya.login(env.get('DISCORD_TOKEN'));
+    naya.eventHandler.setEmitters({ client: naya });
+    naya.eventHandler.loadAll();
+    await naya.login(naya.env.get('DISCORD_TOKEN'));
 }
 
 main();

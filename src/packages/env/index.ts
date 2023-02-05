@@ -6,7 +6,7 @@ export class EnvManager<Env extends Record<string, string>> {
         this.data = {} as Env;
     }
 
-    get(key: keyof Env) {
+    get(key: keyof Env): Env[typeof key] {
         return this.data[key];
     }
 
