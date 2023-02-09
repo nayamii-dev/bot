@@ -20,3 +20,15 @@ export function readdirAll(dir: string) {
 export function xrequire<T extends Record<string, any>>(thing: string): T {
     return require(thing);
 }
+
+
+
+export function createEnum<V extends string>(
+    values: readonly V[]
+): Record<V, V> {
+    const res = {} as Record<V, V>;
+    for (const value of values) {
+        res[value] = value;
+    }
+    return res;
+}

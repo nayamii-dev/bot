@@ -1,6 +1,7 @@
 import { ModuleHandler } from '@naya/core/modules';
 import { CustomEvent } from './Event';
 import { EventEmitter } from 'events';
+import { PrismaClient } from '@prisma/client';
 
 export class EventHandler extends ModuleHandler<CustomEvent> {
     $emitters: Record<string, EventEmitter> = {};
@@ -16,11 +17,19 @@ export class EventHandler extends ModuleHandler<CustomEvent> {
 
         for (const mod of this.modules.values()) {
             const emitter = this.$emitters[mod.options.handler];
-            emitter?.[mod.options.type](
-                mod.options.event,
-                (...args: unknown[]) =>
-                    this.modules.get(mod.options.id)?.run(...args)
-            );
+            if (mod.options.handler === 'prisma') {
+                (emitter as unknown as PrismaClient)
+                    .$on(
+                        mod.options.event as 'beforeExit',
+                        (...eventdata) => this.modules.get(mod.options.id)?.run(...eventdata)
+                    );
+            } else {
+                emitter?.[mod.options.type](
+                    mod.options.event,
+                    (...args: unknown[]) =>
+                        this.modules.get(mod.options.id)?.run(...args)
+                );
+            }
         }
     }
 }

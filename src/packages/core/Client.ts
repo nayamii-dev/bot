@@ -1,5 +1,6 @@
 import { EnvManager } from '@naya/env';
 import { EventHandler } from '@naya/events/EventHandler';
+import { Logger } from '@naya/logger';
 import { clientOptions } from '@naya/util/constants';
 import { PrismaClient } from '@prisma/client';
 import { Client } from 'discord.js';
@@ -7,6 +8,7 @@ import { Client } from 'discord.js';
 export class Nayami<Ready extends boolean = boolean> extends Client<Ready> {
     prisma: PrismaClient;
     eventHandler: EventHandler;
+    logger: Logger;
 
     constructor(
         prisma: PrismaClient,
@@ -21,5 +23,8 @@ export class Nayami<Ready extends boolean = boolean> extends Client<Ready> {
         this.eventHandler = new EventHandler(this, {
             directory: './dist/bot/events',
         });
+
+        this.logger = new Logger('naya', false);
+
     }
 }

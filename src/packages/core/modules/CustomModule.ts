@@ -3,6 +3,7 @@ import { ModuleHandler } from './ModuleHandler';
 
 export interface CustomModuleOptions {
     id: string;
+    guildId?: string;
 }
 
 /**
@@ -23,6 +24,8 @@ export class CustomModule {
     constructor(options: CustomModuleOptions) {
         this.options = options;
     }
+
+    onReady?(): any;
 
     static applyOptions<Opt extends CustomModuleOptions>(options: Opt) {
         return (cls: any): any => {

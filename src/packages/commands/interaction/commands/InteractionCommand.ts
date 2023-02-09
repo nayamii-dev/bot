@@ -3,11 +3,17 @@ import { ContextMenuCommandBuilder, SlashCommandBuilder } from 'discord.js';
 import { InteractionContext } from '../contexts/InteractionContext';
 
 export interface InteractionCommandOptions extends CustomModuleOptions {
-    builder: (
-        builder: SlashCommandBuilder | ContextMenuCommandBuilder
-    ) => typeof builder;
+    builder: () => SlashCommandBuilder | ContextMenuCommandBuilder;
 }
 
 export abstract class BaseInteractionCommand extends CustomModule {
+    declare options: InteractionCommandOptions;
+    builder: SlashCommandBuilder | ContextMenuCommandBuilder;
+
+    constructor(options: InteractionCommandOptions) {
+        super(options);
+        this.builder = options.builder();
+    }
+
     abstract run(ctx: InteractionContext): Promise<any>;
 }

@@ -13,6 +13,7 @@ export abstract class SlashCommand extends BaseInteractionCommand {
     builder: SlashCommandBuilder;
 
     constructor(options: SlashCommandOptions) {
+        //@ts-expect-error
         super(options);
         this.builder = options.builder(new SlashCommandBuilder());
     }
