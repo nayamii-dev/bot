@@ -24,7 +24,7 @@
     },
     "homepage": "https://github.com/nayamii-dev/naya#readme",
     "dependencies": {
-        "@prisma/client": "^4.9.0",
+        "@prisma/client": "^4.10.1",
         "discord.js": "^14.7.1"
     },
     "devDependencies": {
