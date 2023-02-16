@@ -40,7 +40,15 @@ export class FrameworkEventEmitter {
             }
         }
 
+        return this;
 
+
+    }
+
+
+    off(event: string) {
+        delete this.events[event];
+        return this;
     }
 
 
@@ -54,6 +62,7 @@ export class FrameworkEventEmitter {
             throw new EventEmitterError(event, `reached max event emitter count of ${MAX_EVENT_HANDLER}`);
         }
         this.events[event].push({ handler, priority, type: 'on' });
+        return this;
     }
 
     once(event: string, handler: (...args: unknown[]) => unknown, priority = 0) {
@@ -66,6 +75,7 @@ export class FrameworkEventEmitter {
             throw new EventEmitterError(event, `reached max event emitter count of ${MAX_EVENT_HANDLER}`);
         }
         this.events[event].push({ handler, priority, type: 'once' });
+        return this;
     }
 
 }

@@ -8,8 +8,9 @@
         "test": "exit 1",
         "rm": "rm -rf dist",
         "tsc": "tsc",
-        "start": "npm run build && node dist/bot/index",
-        "update-paths": "python3 -m scripts.updatepaths",
+        "start:bot": "node ./dist/bot/index",
+        "start": "npm run build && npm run start:bot",
+        "update-paths": "python3 -m scripts.updatepaths --debug",
         "build": "npm run rm && npm run tsc && npm run update-paths"
     },
     "repository": {

@@ -1,5 +1,6 @@
 import { functions } from '@naya/util';
 import * as fs from 'fs';
+import { CustomError } from '@naya/framework/custom/Error';
 
 export class EnvManager<
     CustomEnv extends Record<string, string>
@@ -9,15 +10,36 @@ export class EnvManager<
     options: { override: boolean; };
 
     constructor(options: { override: boolean; }) {
-        Object.defineProperty(this, 'enis', {
+        Object.defineProperty(this, '$env', {
             configurable: true,
             enumerable: false,
             writable: true,
             value: {}
         });
+
         this.options = options;
     }
 
+    required(keys: (keyof CustomEnv)[]) {
+
+        for (const key of keys) {
+            if (!this.$env[key]) {
+                throw new CustomError(`Env key "${key.toString()}" is missing.`);
+            }
+        }
+
+        return this;
+    }
+
+    setDefaults(things: Partial<CustomEnv>) {
+
+        for (const key of functions.keys(things)) {
+            if (this.$env[key]) continue;
+            this.$env[key] = things[key]!;
+        }
+
+        return this;
+    }
 
 
     envFile(path: string) {

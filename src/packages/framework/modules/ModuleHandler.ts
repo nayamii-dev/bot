@@ -1,7 +1,7 @@
 import { functions } from '@naya/util';
 import { Collection } from 'discord.js';
-import { Nayami } from '@framework/client/NayaClient';
-import { FrameworkEventEmitter } from '@framework/custom/EventEmitter';
+import { Nayami } from '@naya/framework/client';
+import { FrameworkEventEmitter } from '@naya/framework/custom/EventEmitter';
 import { FrameworkBaseModule, FrameworkBaseModule as Module } from './FrameworkModule';
 
 export interface FrameworkModuleHandlerOptions {
@@ -9,7 +9,9 @@ export interface FrameworkModuleHandlerOptions {
 }
 export const EventNames = functions.createEnum([
     'invalidModule',
-    'invalidModuleId'
+    'invalidModuleId',
+    'alreadyLoaded',
+    'load'
 ]);
 
 
@@ -37,18 +39,30 @@ export class FrameworkModuleHandler<
                 this.emit(EventNames.invalidModule, { path: file, data: data });
                 continue;
             }
-            const fakeId = 'your mom';
+            const fakeId = 'lkqeghalkghbaüähglkhtöälkqwhzöäjgsklhgö';
             const thing = new data.default({ id: fakeId });
+            thing.handler = this;
+            thing.client = this.client;
             if (thing.options.id === fakeId) {
                 this.emit(
                     EventNames.invalidModuleId,
                     {
-                        id: thing.options.id,
-                        path: file,
                         mod: thing
                     });
                 continue;
             }
+            if (this.modules.has(thing.options.id)) {
+                this.emit(
+                    EventNames.alreadyLoaded,
+                    {
+                        mod: thing
+                    });
+                continue;
+            }
+            this.modules.set(thing.options.id, thing as FrameworkBaseModule);
+            this.emit(EventNames.load, { mod: thing });
+
+
         }
     }
 

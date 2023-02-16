@@ -1,4 +1,4 @@
-import { Nayami } from '../client/NayaClient';
+import { Nayami } from '../client';
 import { FrameworkModuleHandler } from './ModuleHandler';
 
 export interface FrameworkBaseModuleOptions {
