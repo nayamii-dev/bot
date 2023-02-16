@@ -10,7 +10,7 @@
         "tsc": "tsc",
         "start:bot": "node ./dist/bot/index",
         "start": "npm run build && npm run start:bot",
-        "update-paths": "python3 -m scripts.updatepaths --debug",
+        "update-paths": "python3 -m scripts.updatepaths",
         "build": "npm run rm && npm run tsc && npm run update-paths"
     },
     "repository": {
