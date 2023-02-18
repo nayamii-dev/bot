@@ -13,9 +13,7 @@
         "strict": true,
         "baseUrl": "src",
         "paths": {
-            "@naya/*": [
-                "packages/*"
-            ]
+            "@naya/*": ["packages/*"]
         },
         "target": "ES2020"
     }

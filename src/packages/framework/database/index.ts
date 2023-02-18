@@ -2,12 +2,11 @@ import { env } from '@naya/util/constants';
 import { PrismaClient } from '@prisma/client';
 
 export class Database {
-
     prisma: PrismaClient;
 
     constructor() {
         this.prisma = new PrismaClient({
-            datasources: { db: { url: env.get('DATABASE_URL') } }
+            datasources: { db: { url: env.get('DATABASE_URL') } },
         });
     }
 

@@ -14,7 +14,6 @@ export function readdir(path: string) {
     return res;
 }
 
-
 export function resolve(...paths: string[]) {
     return path.resolve(...paths);
 }

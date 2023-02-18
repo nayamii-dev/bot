@@ -8,7 +8,7 @@ import { Events } from 'discord.js';
 
 @applyOptions<FrameworkEventOptions>({
     id: 'events.client.ready',
-    event: Events.ClientReady,
+    event: Events.InteractionCreate,
     handler: 'client',
     type: 'on',
 })

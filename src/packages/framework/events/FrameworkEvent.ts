@@ -1,4 +1,7 @@
-import { FrameworkBaseModule, FrameworkBaseModuleOptions } from '../modules/FrameworkModule';
+import {
+    FrameworkBaseModule,
+    FrameworkBaseModuleOptions,
+} from '../modules/FrameworkModule';
 
 export interface FrameworkEventOptions extends FrameworkBaseModuleOptions {
     event: string;
@@ -9,7 +12,5 @@ export interface FrameworkEventOptions extends FrameworkBaseModuleOptions {
 export abstract class FrameworkEvent extends FrameworkBaseModule {
     declare options: FrameworkEventOptions;
 
-
     abstract run(...eventArgs: unknown[]): Promise<void>;
-
 }
