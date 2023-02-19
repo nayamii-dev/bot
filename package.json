@@ -9,7 +9,9 @@
         "rm": "rm -rf dist",
         "tsc": "tsc",
         "start:bot": "node ./dist/bot/index",
+        "start:bot:commands": "UPLOAD_COMMANDS=1 node ./dist/bot/index",
         "start": "npm run build && npm run start:bot",
+        "start:commands": "npm run build && npm run start:bot:commands",
         "update-paths": "python3 -m scripts.updatepaths",
         "build": "npm run rm && npm run tsc && npm run update-paths"
     },
