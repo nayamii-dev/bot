@@ -34,7 +34,7 @@ class Main:
     def run(self) -> int:
         parser = argparse.ArgumentParser()
 
-        parser.add_argument('--debug')
+        parser.add_argument('--debug', action='store_true')
 
 
         args = parser.parse_args()
@@ -49,20 +49,20 @@ class Main:
             os.path.abspath(os.path.curdir), 'dist'
         )
 
-        debug(dist_path)
+        # debug(dist_path, debug_flag=args.debug)
         constructedPath = pathlib.Path(dist_path)
-        debug(constructedPath)
+        # debug(constructedPath, debug_flag=args.debug)
         for a in constructedPath.rglob(pattern='*'):
             if a.is_file():
                 content = a.read_text('utf-8')
                 new_content = ''
                 for key in paths.keys():
-                    debug(f'{key=}')
+                    debug(f'{key=}', debug_flag=args.debug)
                     path = os.path.join(os.path.abspath(os.path.curdir), 'dist', paths[key][0].replace('*', ''))
                     new_content = content.replace(key.replace('*', ''), path)
-                debug(f'{new_content}')
+                # debug(f'{new_content}', debug_flag=args.debug)
                 a.write_text(new_content)
-                debug(f'updated {a.name}.')
+                debug(f'updated {a.absolute()}.', debug_flag=args.debug)
 
 
 def main() -> int:

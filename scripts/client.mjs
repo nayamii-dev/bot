@@ -23,7 +23,6 @@ await client
             avatar: process.argv.slice(2)[0]
                 ? await readFile(process.argv.slice(2)[0])
                 : undefined,
-            username: process.argv.slice(3)[0],
         });
         client.destroy();
         process.exit(0);
