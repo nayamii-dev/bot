@@ -13,7 +13,9 @@
         "strict": true,
         "baseUrl": "src",
         "paths": {
-            "@naya/*": ["packages/*"]
+            "@naya/*": [
+                "framework/*"
+            ]
         },
         "target": "ES2020"
     }

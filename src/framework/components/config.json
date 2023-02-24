@@ -1,0 +1,8 @@
+{
+    "name": "@naya/components",
+    "description": "",
+    "paths": {
+        "Component": "./Component",
+        "ComponentHandler": "./ComponentHandler"
+    }
+}
