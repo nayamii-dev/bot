@@ -4,7 +4,7 @@ import { createStringEnum, keys } from '@naya/util/functions';
 
 export const loggerTypes = createStringEnum([
     'LOG', 'INFO', 'ERROR', 'FATAL',
-    'SENTRY'
+    'SENTRY', 'DEBUG'
 ]);
 
 const TOPICS = {
@@ -19,20 +19,42 @@ export class Logger {
 
     constructor(public readonly label: string) { }
 
+    public debug({
 
-
-    public log({
         content,
         label = this.label,
-        topic
+        topic,
+        shard = 0
     }: {
         content: string;
         label: string;
         topic: keyof typeof TOPICS;
+        shard?: number;
+    }) {
+
+        if (env.get('BOT_ENV') !== 'dev') return;
+        return this.$write({
+            content, label, topic, type: loggerTypes.DEBUG,
+            shard
+        });
+
+    }
+
+    public log({
+        content,
+        label = this.label,
+        topic,
+        shard = 0
+    }: {
+        content: string;
+        label: string;
+        topic: keyof typeof TOPICS;
+        shard?: number;
     }) {
 
         return this.$write({
-            content, label, topic, type: 'LOG'
+            content, label, topic, type: 'LOG',
+            shard
         });
 
     }
@@ -43,19 +65,19 @@ export class Logger {
         content,
         label = this.label,
         topic = 'LOG_INFO',
-        type
+        type,
+        shard = 0
     }: {
         content: string;
         label?: string;
         topic?: keyof typeof TOPICS;
         type: LoggerType;
+        shard?: number;
     }) {
-
-
-
         console.log([
+            `Shard #${shard}`,
             `[${new Date().toLocaleTimeString(env.get('LOCALE'))}]`,
-            `< ${label}:${topic}:${type}> `,
+            `<${label}:${topic}:${type}> `,
             content
         ].join(' '));
     }

@@ -16,9 +16,15 @@ export default class ReadyEvent extends Listener {
 
     run(client: Nayami<true>) {
         client.logger.log({
-            content: `${client.user?.username} is now ready`,
+            content: `${client.user.username} is now ready`,
             label: 'CLIENT_INIT',
             topic: 'CLIENT_INIT'
+        });
+
+        client.user.setPresence({
+            activities: [{
+                name: 'with ei'
+            }]
         });
     }
 }

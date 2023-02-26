@@ -85,6 +85,17 @@ class EnvManager<CustomEnv extends Record<string, string>> {
         return this;
     }
 
+
+    format() {
+
+
+        if (!('COLORTERM' in this.$env)) {
+
+        }
+
+        return this;
+    }
+
     get<Key extends keyof CustomEnv>(
         key: Key
     ): CustomEnv[typeof key] | undefined {
@@ -96,17 +107,19 @@ export const env = new EnvManager<{
     DISCORD_TOKEN: string;
     CLIENT_ID: string;
     MONGO_URI: string;
+    COLORTERM: string;
     LOCALE: string;
     MONGO_PASS: string;
-    NODE_ENV: 'prod' | 'dev' | 'premium';
+    BOT_ENV: 'prod' | 'dev' | 'premium';
 }>({ override: false })
     .setDefaults({
         CLIENT_ID: '947042553457410088',
-        NODE_ENV: 'dev',
+        BOT_ENV: 'dev',
         MONGO_URI: 'mongodb://localhost:27017/nayami',
-        LOCALE: 'en-gb'
+        LOCALE: 'en-gb',
+        COLORTERM: process.env.TERM || process.env.COLORTERM
     })
     .envFile('./.config/.env')
     .required([
-        'CLIENT_ID', 'DISCORD_TOKEN', 'NODE_ENV'
+        'CLIENT_ID', 'DISCORD_TOKEN', 'BOT_ENV'
     ]);

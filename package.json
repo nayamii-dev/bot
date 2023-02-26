@@ -1,5 +1,5 @@
 {
-    "name": "naya",
+    "name": "@nayamii-dev/naya-bot",
     "version": "0.0.2",
     "private": true,
     "description": "kitsune discord bot",
@@ -28,6 +28,6 @@
     "homepage": "https://github.com/nayamii-dev/naya#readme",
     "dependencies": {
         "discord.js": "^14.7.1",
-        "mongodb": ""
+        "mongodb": "^5.1.0"
     }
 }
