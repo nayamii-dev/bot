@@ -15,15 +15,22 @@ export default class ReadyEvent extends Listener {
 
 
     run(client: Nayami<true>) {
+        const lang = this.client.i18n.defaultLanguage.get('SYSTEM')!;
+        if (!lang) return;
+        const data = {
+            guilds: client.guilds.cache.size,
+            users: client.users.cache.size
+        };
+
         client.logger.log({
-            content: `${client.user.username} is now ready`,
+            content: `${lang.CLIENT_READY(client.user.username, data)}`,
             label: 'CLIENT_INIT',
             topic: 'CLIENT_INIT'
         });
 
         client.user.setPresence({
             activities: [{
-                name: 'with ei'
+                name: lang.CLIENT_PRESENCE(data)
             }]
         });
     }

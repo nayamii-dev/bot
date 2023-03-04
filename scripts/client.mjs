@@ -5,6 +5,8 @@ const client = new Client({ intents: [] });
 const args = (() => {
     const args = process.argv.slice(2);
     switch (args[0]) {
+        case 'check-thing':
+            return { type: 'CHECK', thing: '' };
         case 'set-avatar':
             return {
                 type: 'SET_AVATAR',
@@ -49,23 +51,27 @@ await client
         if (!type) {
             throw new Error('invalid type');
         }
-        const data = {};
-        if (type === 'SET_USERNAME') {
-            data.username = thing;
+        if (type === 'CHECK') {
+            console.log(client.api);
+        } else {
+            const data = {};
+            if (type === 'SET_USERNAME') {
+                data.username = thing;
+            }
+            if (type === 'SET_AVATAR') {
+                data.avatar = thing;
+            }
+            if (!Object.keys(type).length) {
+                throw new Error('invalid argument');
+            }
+            if (!thing) {
+                throw new Error('invalid thing. please specify sone');
+            }
+            await c.user.edit({
+                username: data.username,
+                avatar: data.avatar
+            });
         }
-        if (type === 'SET_AVATAR') {
-            data.avatar = thing;
-        }
-        if (!Object.keys(type).length) {
-            throw new Error('invalid argument');
-        }
-        if (!thing) {
-            throw new Error('invalid thing. please specify sone');
-        }
-        await c.user.edit({
-            username: data.username,
-            avatar: data.avatar
-        });
         client.destroy();
         process.exit(0);
     })

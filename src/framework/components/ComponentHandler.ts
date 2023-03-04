@@ -55,6 +55,8 @@ export class ComponentHandler<
                 // TODO: fire event when already loaded
                 continue;
             }
+            mod.client = this.client;
+            mod.handler = this;
 
             this.components.set(mod.options.id, mod);
             this.emit(ComponentHandler.events.LOAD, { mod });

@@ -97,9 +97,10 @@ class EnvManager<CustomEnv extends Record<string, string>> {
     }
 
     get<Key extends keyof CustomEnv>(
-        key: Key
+        key: Key,
+        def?: CustomEnv[typeof key]
     ): CustomEnv[typeof key] | undefined {
-        return this.$env[key];
+        return this.$env[key] || def;
     }
 }
 
@@ -108,6 +109,7 @@ export const env = new EnvManager<{
     CLIENT_ID: string;
     MONGO_URI: string;
     COLORTERM: string;
+    SUPPORT_SERVER: string;
     LOCALE: string;
     MONGO_PASS: string;
     BOT_ENV: 'prod' | 'dev' | 'premium';
