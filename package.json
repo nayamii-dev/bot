@@ -27,7 +27,7 @@
     },
     "homepage": "https://github.com/nayamii-dev/naya#readme",
     "dependencies": {
-        "discord.js": "^14.7.1",
+        "discord.js": "^14.8.0",
         "mongodb": "^5.1.0"
     }
 }
